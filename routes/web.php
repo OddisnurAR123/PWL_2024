@@ -145,3 +145,17 @@ Route::resource('photos', PhotoController::class)->only([
 Route::resource('photos', PhotoController::class)->except([ 
     'create', 'store', 'update', 'destroy' 
 ]); 
+
+// Route yang akan  memanggil View sesuai dengan nama file tanpa ‘blade.php’.
+// Route::get('/greeting', function () { 
+//     return view('hello', ['name' => 'Oddis Nur Alifathur Razaaq']); 
+// }); 
+
+// Melakukan perubahan pada route
+// Route::get('/greeting', function () { 
+//     return view('blog.hello', ['name' => 'Oddis Nur Alifathur Razaaq']); 
+// }); 
+
+// Mengubah route  /greeting dan mengarahkan ke WelcomeController pada fungsi greeting.
+Route::get('/greeting', [WelcomeController::class, 
+'greeting']); 
