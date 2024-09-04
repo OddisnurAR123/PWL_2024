@@ -7,6 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PhotoController; 
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,7 +132,7 @@ Route::get('/about', [PageController::class, 'about']);
 Route::get('/articles/{id}', [PageController::class, 'articles']);
 
 // Route untuk modifikasi dengan konsep Single Action Controller
-Route::get('/', HomeController::class);
+// Route::get('/', HomeController::class);
 Route::get('/about', AboutController::class);
 Route::get('/articles/{id}', ArticleController::class);
 
@@ -159,3 +162,20 @@ Route::resource('photos', PhotoController::class)->except([
 // Mengubah route  /greeting dan mengarahkan ke WelcomeController pada fungsi greeting.
 Route::get('/greeting', [WelcomeController::class, 
 'greeting']); 
+
+// Route untuk Halaman Home, digunakan untuk menampilkan Halaman Awal Website
+Route::get('/', [HomeController::class, 'index']);
+
+// Route untuk menampilkan halaman product dengan route prefix
+Route::prefix('/category')->group(function () {
+    Route::get('/food-beverage', [ProductController::class, 'foodBeverage']);
+    Route::get('/beauty-health', [ProductController::class, 'beautyHealth']);
+    Route::get('/home-care', [ProductController::class, 'homeCare']);
+    Route::get('/baby-kid', [ProductController::class, 'babyKid']);
+});
+
+// Route untuk menampilkan halaman user
+Route::get('/user/{id}/name/{name}', [UserController::class, 'halamanProfile']);
+
+// Route Untuk menampilkan halaman penjualan
+Route::get('/penjualan', [PenjualanController::class, 'index']);
